@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="partial/common-head"></div>
+
+<div class="container">
+
+    <div class="row my-5 py-5">
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="card border border-dark border-1 text-white bg-dark" id="form-background">
+                <img src="/img/user.png" class="mb-4 mx-auto img-fluid" id="user-image" alt="user image">
+                <div class="card-body">
+                    <h4 class="bg-dark text-white card-header text-center border-bottom pb-3 mb-4">
+                        Registration form
+                    </h4>
+
+                    <form method="post" th:object="${studentForm}" th:action="'/student/register-form'" id="user-form">
+
+                        <input type="hidden"> <!--th:field="${userForm.id}" th:if="${updateMode}" >-->
+
+<!--
+                        <input type="hidden" th:field="${studentForm.role.id}" th:value="${'1'}">
+-->
+
+                        <div class="row justify-content-center my-4">
+                            <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
+                                <label for="email" class="col-form-label">Email</label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-6 my-2 text-center">
+                                <input type="email" class="form-control" id="email" placeholder="name@example.com"
+                                       th:field="${studentForm.email}" required>
+
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                                    Name Error
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-sm-2 col-md-2 col-lg-3 text-center mt-2">
+                                <label class="col-form-label">Name</label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 text-center my-2">
+                                <input type="text" class="form-control" id="firstName"
+                                       th:field="${studentForm.firstName}" required>
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                                    Name Error
+                                </div>
+                                <div id="firstNameHelp" class="form-text my-2">First name</div>
+
+                            </div>
+                            <div class="col-sm-12 col-md-3 text-center my-2">
+                                <input type="text" class="form-control" id="lastName"
+                                       th:field="${studentForm.lastName}">
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" required>
+                                    Name Error
+                                </div>
+                                <div id="lastNameHelp" class="form-text my-2">Last name</div>
+                            </div>
+                        </div>
+
+                        <!--                        <select class="form-select" aria-label="Default select example"
+                                                        id="identificationDocument">
+                                                    &lt;!&ndash;th:field="${studentForm.identificationDocument}">&ndash;&gt;
+                                                    <option>DNI</option>
+                                                    <option value="2">Libreta Cívica</option>
+                                                    <option value="3">Libreta Enrolamiento</option>
+                                                </select>-->
+
+                        <div class="row justify-content-center mt-3">
+                            <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
+                                <label class="col-form-label">Identification Document</label>
+                            </div>
+                            <div class="col-sm-12 col-md-3 text-center my-2">
+                                <select class="form-select" aria-label="Default select example"
+                                        id="tipeOfIdentificationDocument"
+                                        th:field="${studentForm.typeOfIdentificationDocument}">
+                                    <option th:each="typeOfIdentificationDocument: ${typesOfIdentificationDocument}"
+                                            th:text="${typeOfIdentificationDocument.name}"
+                                            th:value="${typeOfIdentificationDocument.id}"
+                                    ></option>
+                                </select>
+                                <!--                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                                                     th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
+                                                                    Name Error
+                                                                </div>-->
+                            </div>
+                            <div class="col-sm-12 col-md-3 text-center my-2">
+                                <input type="text" class="form-control" id="identificationDocument"
+                                       th:field="${studentForm.identificationDocument}" required>
+                                       <!--required-->
+
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('identificationDocument')}"
+                                     th:errors="*{identificationDocument}">Name Error
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-3"><!--
+                             th:if="${updateMode == null or updateMode == false}">-->
+                            <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
+                                <label for="file" class="col-form-label">File</label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-6 my-2 text-center">
+                                <input type="text" class="form-control" id="file"
+                                       th:field="${studentForm.file}" required>
+
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('file')}"
+                                     th:errors="*{file}">Name Error
+                                </div>
+<!--                                <div id="passwordHelpBlock" class="form-text my-2">
+                                    Your password must be 8-10 characters long, contain letters and numbers, only.
+                                </div>-->
+
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-3"><!--
+                             th:if="${updateMode == null or updateMode == false}">-->
+                            <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
+                                <label for="password" class="col-form-label">Password</label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-6 my-2 text-center">
+                                <input type="password" class="form-control" id="password"
+                                       th:field="${studentForm.password}" required>
+
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('password')}"
+                                     th:errors="*{password}">Name Error
+                                </div>
+                                <div id="passwordHelpBlock" class="form-text my-2">
+                                    Your password must be 8-10 characters long, contain letters and numbers, only.
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center mt-3">
+                            <!--th:if="${updateMode == null or updateMode == false}">-->
+                            <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
+                                <label for="password-confirmation" class="col-form-label">Confirm password</label>
+                            </div>
+                            <div class="col-sm-12 col-md-2 col-lg-6 my-2 text-center">
+                                <input type="password" class="form-control" id="password-confirmation"
+                                       th:field="${studentForm.passwordConfirmation}" required>
+
+                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                     th:if="${#fields.hasErrors('passwordConfirmation')}"
+                                     th:errors="*{passwordConfirmation}">Name Error
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <div class="d-grid gap-2 col-sm-3 col-md-8 col-lg-4 mx-auto mt-5 mb-2">
+                            <!--                            <a class="btn btn-lg btn-danger">
+                                                            &lt;!&ndash;th:if="${updateMode}" th:href="@{'/update-user/cancel'}">&ndash;&gt;CANCEL
+                                                        </a>-->
+                            <!--                            <button type="button" class="btn btn-secondary" data-toggle="modal" th:if="${updateMode}"
+                                                                data-target="#changePasswordModal">Change Password
+                                                        </button>-->
+                            <button type="submit" class="btn btn-lg btn-success">REGISTER
+                                <!--<th:text="${updateMode == null or updateMode == false} ? 'REGISTER' : 'SAVE CHANGES'">-->
+                            </button>
+
+
+                            <!-- Button trigger modal -->
+                            <!--                            <button th:if="${updateMode}" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                                data-bs-target="#exampleModal">
+                                                            Launch demo modal
+                                                        </button>-->
+
+                            <!-- Modal -->
+                            <!--                            <div class="modal fade text-dark" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                                             aria-hidden="true">
+                                                            <div class="modal-dialog">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                                                aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>asduiasdiuasd</p>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                                                            Close
+                                                                        </button>
+                                                                        <button type="button" class="btn btn-primary" onclick="saveChanges()">Save changes</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>-->
+                        </div>
+
+                    </form>
+                    <!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Cerrar Sesion"/>
+                    </form>-->
+
+                    <!--
+                                        <div th:if="${updateMode}" th:include="change-password-form.html" th:remove="tag"></div>
+                    -->
+
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+    </div>
+
+</div>
+
+<div th:replace="partial/common-footer"></div>

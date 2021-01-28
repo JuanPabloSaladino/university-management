@@ -1,0 +1,27 @@
+.input-form {
+    width: 65%;
+}
+
+body {
+    background: #141E30; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #243B55, #141E30); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#form-background {
+    /*
+    background-image: url("/img/unlam1.jpg");
+    */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*
+    opacity: 0.5;
+    */
+}
+
+#user-image {
+    width: 9em;
+    height: 9em;
+    margin-top: -5em;
+}
