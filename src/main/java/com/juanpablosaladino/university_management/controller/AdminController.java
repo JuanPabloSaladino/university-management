@@ -217,6 +217,8 @@ public class AdminController {
     @GetMapping(value = "/subjects/create")
     public String getSubjectForm(Model model) {
         model.addAttribute("subjectForm", new Subject());
+        List<Professor> professors = (List<Professor>) professorService.getProfessors();
+        model.addAttribute("professors", professors);
         return "subject-form";
     }
 

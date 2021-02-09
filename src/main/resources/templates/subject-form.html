@@ -72,7 +72,14 @@
                                 <label for="subject-professor" class="col-form-label">Professor</label>
                             </div>
                             <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center">
-                                <input type="text" class="form-control" id="subject-professor">
+                                <select class="form-select" aria-label="Default select example"
+                                        id="subject-professor"
+                                        th:field="${subjectForm.professor}">
+                                    <option th:each="professor: ${professors}"
+                                            th:text="${professor.lastName}"
+                                            th:value="${professor.id}"
+                                    ></option>
+                                </select>
                             </div>
                         </div>
 
