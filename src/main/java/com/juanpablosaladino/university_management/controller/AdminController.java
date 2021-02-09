@@ -68,7 +68,7 @@ public class AdminController {
 */
 
                 redirectAttributes.addFlashAttribute("successfullRegistration", true);
-                return "redirect:/";
+                return "redirect:/admin/users-list";
 
             } catch (Exception e) {
                 model.addAttribute("professorForm", professor);

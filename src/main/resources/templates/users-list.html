@@ -11,11 +11,17 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 
+    <div class="alert alert-success alert-dismissible my-1 fade show text-center" role="alert"
+         th:if="${successfullRegistration == true}">
+        <strong>Successful registration!</strong>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
     <div class="row my-5 py-5">
         <div class="col-2"></div>
         <div class="col-8 text-white">
 
-            <div th:if="${students.isEmpty()}" class="my-5 text-center">
+            <div th:if="${students.isEmpty() and professors.isEmpty()}" class="my-5 text-center">
                 <h1 class="text-center my-5">No registered users in system, still </h1>
                 <img src="/img/no-users.png" th:src="@{/img/no-users.png}" class="mb-4 mx-auto img-fluid"
                      alt="no-users-image">
