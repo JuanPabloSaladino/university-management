@@ -1,4 +1,3 @@
-<!--
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
@@ -6,17 +5,17 @@
 
 <div class="container">
 
-    &lt;!&ndash;<div class="alert alert-success alert-dismissible my-1 fade show text-center" role="alert"
-         th:if="${successfullDelete == true}">
-        <strong>Successful delete!</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+    <!--    <div class="alert alert-success alert-dismissible my-1 fade show text-center" role="alert"
+             th:if="${successfullDelete == true}">
+            <strong>Successful delete!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>-->
 
     <div class="alert alert-success alert-dismissible my-1 fade show text-center" role="alert"
          th:if="${successfullRegistration == true}">
         <strong>Successful registration!</strong>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>&ndash;&gt;
+    </div>
 
     <div class="row my-5 py-5">
         <div class="col-2"></div>
@@ -29,30 +28,37 @@
             </div>
 
             <div th:if="${!subjects.isEmpty()}" class="my-5">
-                <h3 class="text-center mb-2">Subjects</h3>
+                <h3 class="text-center mb-5">Subjects</h3>
                 <table class="table table-dark table-hover text-center">
                     <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">Information</th>
                         <th scope="col">Avaible</th>
+                        <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="student: ${studentsList}">
-                        <td th:text="${student.firstName}"></td>
-                        <td th:text="${student.lastName}"></td>
-                        <td th:text="${student.email}"></td>
+                    <tr th:each="subject: ${subjects}">
+                        <td th:text="${subject.name}"></td>
+                        <td th:if="${subject.avaible == true}">
+                            <i class="fas fa-check-circle"></i>
+                        </td>
+                        <td th:if="${subject.avaible == false}">
+                            <i class="fas fa-times-circle"></i>
+                        </td>
                         <td>
                             <div class="d-grid gap-2 d-flex justify-content-center">
+                                <a class="btn btn-primary" type="button"
+                                   th:href="@{'/admin/subjects/info'+${subject.id}}">
+                                    <i class="fas fa-info-circle"></i>
+                                </a>
                                 <a class="btn btn-warning" type="button"
-                                   th:href="@{'/admin/update-student/'+${student.id}}">
+                                   th:href="@{'/admin/subjects/update/'+${subject.id}}">
 
                                     <i class="fas fa-user-edit"></i>
                                 </a>
                                 <a class="btn btn-danger" type="button"
-                                   th:href="@{'/admin/delete-student/'+${student.id}}">
+                                   th:href="@{'/admin/subjects/delete'+${subject.id}}">
                                     <i class="fas fa-user-times"></i>
                                 </a>
                             </div>
@@ -70,4 +76,4 @@
 
 </div>
 
-<div th:replace="partial/common-footer"></div>-->
+<div th:replace="partial/common-footer"></div>

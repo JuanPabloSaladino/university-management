@@ -223,30 +223,35 @@ public class AdminController {
     }
 
     @PostMapping(value = "/subjects/create")
-    public String createSubject(@Valid @ModelAttribute("subjectForm") Subject subject, ModelMap model, BindingResult result) {
+    public String createSubject(@Valid @ModelAttribute("subjectForm") Subject subject, ModelMap model, BindingResult result, RedirectAttributes redirectAttributes) {
         if (result.hasErrors()) {
             model.addAttribute("subjectForm", subject);
-            //List<Professor> professors = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
-            //model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
+            List<Professor> professors = (List<Professor>) professorService.getProfessors();
+            model.addAttribute("professors", professors);
         } else {
             try {
 
                 subjectService.createSubject(subject);
                 model.addAttribute("subjectForm", new Subject());
 
-/*
                 redirectAttributes.addFlashAttribute("successfullRegistration", true);
-*/
-                return "redirect:/admin/users-list";
+                return "redirect:/admin/subjects";
 
             } catch (Exception e) {
                 model.addAttribute("subjectForm", subject);
-/*                List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
-                model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);*/
+                List<Professor> professors = (List<Professor>) professorService.getProfessors();
+                model.addAttribute("professors", professors);
                 model.addAttribute("errorMessage", e.getMessage());
             }
         }
         return "professor-form";
+    }
+
+    @GetMapping(value = "/subjects")
+    public String subjectsList(Model model) {
+        List<Subject> subjects = (List<Subject>) subjectService.getSubjects();
+        model.addAttribute("subjects", subjects);
+        return "subjects-list";
     }
 
 }
