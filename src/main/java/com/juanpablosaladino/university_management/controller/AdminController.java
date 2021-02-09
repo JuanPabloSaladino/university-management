@@ -178,6 +178,21 @@ public class AdminController {
 
     }
 
+    @GetMapping("/delete-professor/{id}")
+    public String deleteProfessor(Model model, @PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes) {
+
+        try {
+            professorService.deleteProfessor(id);
+            redirectAttributes.addFlashAttribute("successfullDelete", true);
+
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return "redirect:/admin/users-list";
+
+    }
+
 
     @GetMapping("/users-list")
     public String usersList(Model model) {

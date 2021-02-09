@@ -12,5 +12,5 @@ public interface ProfessorService {
 
     Iterable<Professor> getProfessors();
 
-
+    void deleteProfessor(Long id) throws Exception;
 }

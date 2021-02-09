@@ -39,6 +39,12 @@ public class ProfessorServiceImpl implements ProfessorService {
         return professorRepository.findAll();
     }
 
+    @Override
+    public void deleteProfessor(Long id) throws Exception {
+        Professor professor = getProfessorById(id);
+        professorRepository.delete(professor);
+    }
+
     private boolean checkUserEmailIsAvaible(User user) throws Exception {
         Optional<User> userFound = userRepository.findByEmail(user.getEmail());
         if (userFound.isPresent()) {
