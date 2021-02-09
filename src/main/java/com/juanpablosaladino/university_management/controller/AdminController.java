@@ -103,7 +103,7 @@ public class AdminController {
                 Set<Role> professorRoles = new HashSet<Role>();
                 professorRoles.add(professorRole);
 
-                professor.setRoles((Set<Role>) professorRoles);;
+                //professor.setRoles((Set<Role>) professorRoles);
                 professor.setActive(true);
                 userService.updateUser(professor);
                 model.addAttribute("professorForm", new Professor());
@@ -119,6 +119,48 @@ public class AdminController {
         }
         return "professor-form";
     }
+
+    @GetMapping(value = "update-student/{id}")
+    public String getUpdateStudentForm(Model model, @PathVariable(name = "id") Long id) throws Exception {
+        Student studentToUpdate = studentService.getStudentById(id);
+        model.addAttribute("studentForm", studentToUpdate);
+        model.addAttribute("updateMode", true);
+        List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
+        model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
+
+        return "student-form";
+    }
+
+    @PostMapping("/update-student")
+    public String updateStudent(@Valid @ModelAttribute("studentForm") Student student, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
+        if (result.hasErrors()) {
+            model.addAttribute("studentForm", student);
+            model.addAttribute("updateMode", true);
+        } else {
+            try {
+                Role studentRole = roleService.getRoleByName("student");
+
+                Set<Role> studentRoles = new HashSet<Role>();
+                studentRoles.add(studentRole);
+
+                //student.setRoles((Set<Role>) studentRoles);
+                userService.updateUser(student);
+                model.addAttribute("studentForm", new Student());
+
+                redirectAttributes.addFlashAttribute("successfullUpdate", true);
+                return "redirect:/";
+
+            } catch (Exception e) {
+                model.addAttribute("studentForm", student);
+                List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
+                model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
+                model.addAttribute("errorMessage", e.getMessage());
+                model.addAttribute("updateMode", true);
+            }
+        }
+        return "student-form";
+    }
+
 
     @GetMapping("/users-list")
     public String usersList(Model model) {

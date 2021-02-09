@@ -15,13 +15,23 @@
                         Registration form
                     </h4>
 
-                    <form method="post" th:object="${studentForm}" th:action="'/student/register-form'" id="user-form">
+                    <form method="post" th:object="${studentForm}"
+                          th:action="${updateMode} ? '/admin/update-student' : '/student/register-form'">
+                        <!--
+                                                  th:action="'/student/register-form'" id="user-form"
+                        -->
 
-                        <input type="hidden"> <!--th:field="${userForm.id}" th:if="${updateMode}" >-->
 
-<!--
-                        <input type="hidden" th:field="${studentForm.role.id}" th:value="${'1'}">
--->
+                        <!--
+                                                <input type="hidden"> th:field="${userForm.id}" th:if="${updateMode}" >
+                        -->
+
+                        <input type="hidden" th:field="${studentForm.id}" th:if="${updateMode}">
+
+                        <!--
+                                                <input type="hidden" th:field="${professorForm.id}" th:if="${updateMode}">
+                        -->
+
 
                         <div class="row justify-content-center my-4">
                             <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
@@ -92,7 +102,7 @@
                             <div class="col-sm-12 col-md-3 text-center my-2">
                                 <input type="text" class="form-control" id="identificationDocument"
                                        th:field="${studentForm.identificationDocument}" required>
-                                       <!--required-->
+                                <!--required-->
 
                                 <div class="alert alert-danger my-1 text-center" role="alert"
                                      th:if="${#fields.hasErrors('identificationDocument')}"
@@ -114,14 +124,14 @@
                                      th:if="${#fields.hasErrors('file')}"
                                      th:errors="*{file}">Name Error
                                 </div>
-<!--                                <div id="passwordHelpBlock" class="form-text my-2">
-                                    Your password must be 8-10 characters long, contain letters and numbers, only.
-                                </div>-->
+                                <!--                                <div id="passwordHelpBlock" class="form-text my-2">
+                                                                    Your password must be 8-10 characters long, contain letters and numbers, only.
+                                                                </div>-->
 
                             </div>
                         </div>
 
-                        <div class="row justify-content-center mt-3"><!--
+                        <div class="row justify-content-center mt-3" th:if="${updateMode == null or updateMode == false}"><!--
                              th:if="${updateMode == null or updateMode == false}">-->
                             <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
                                 <label for="password" class="col-form-label">Password</label>
@@ -141,7 +151,7 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-center mt-3">
+                        <div class="row justify-content-center mt-3" th:if="${updateMode == null or updateMode == false}">
                             <!--th:if="${updateMode == null or updateMode == false}">-->
                             <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
                                 <label for="password-confirmation" class="col-form-label">Confirm password</label>
@@ -166,7 +176,9 @@
                             <!--                            <button type="button" class="btn btn-secondary" data-toggle="modal" th:if="${updateMode}"
                                                                 data-target="#changePasswordModal">Change Password
                                                         </button>-->
-                            <button type="submit" class="btn btn-lg btn-success">REGISTER
+                            <button type="submit" class="btn btn-lg btn-success"
+                                    th:text="${updateMode == null or updateMode == false} ? 'REGISTER' : 'SAVE CHANGES'">
+                                REGISTER
                                 <!--<th:text="${updateMode == null or updateMode == false} ? 'REGISTER' : 'SAVE CHANGES'">-->
                             </button>
 

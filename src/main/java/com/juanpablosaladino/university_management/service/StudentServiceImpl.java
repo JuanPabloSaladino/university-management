@@ -33,4 +33,9 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findByIdentificationDocument(identificationDocument);
     }
 
+    @Override
+    public Student getStudentById(Long id) throws Exception {
+        return studentRepository.findById(id).orElseThrow(() -> new Exception("Student does not exists"));
+    }
+
 }

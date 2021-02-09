@@ -7,7 +7,13 @@
 
     <div class="row my-5 py-5">
         <div class="col-2"></div>
-        <div class="col-8">
+        <div class="col-8 text-white">
+
+            <div th:if="${students.isEmpty()}" class="my-5 text-center">
+                <h1 class="text-center my-5">No registered users in system, still </h1>
+                <img src="/img/no-users.png" th:src="@{/img/no-users.png}" class="mb-4 mx-auto img-fluid"
+                     alt="no-users-image">
+            </div>
 
             <div th:if="${!students.isEmpty()}" class="my-5">
                 <h3 class="text-center mb-2">Students</h3>
@@ -27,8 +33,8 @@
                         <td th:text="${student.email}"></td>
                         <td>
                             <div class="d-grid gap-2 d-flex justify-content-center">
-                                <a class="btn btn-warning" type="button">
-                                    <!--th:href="@{'/update-user/'+${user.id}}">-->
+                                <a class="btn btn-warning" type="button" th:href="@{'/admin/update-student/'+${student.id}}">
+
                                     <i class="fas fa-user-edit"></i>
                                 </a>
                                 <a class="btn btn-danger" type="button"><!--th:href="@{'/delete-user/'+${user.id}}">-->

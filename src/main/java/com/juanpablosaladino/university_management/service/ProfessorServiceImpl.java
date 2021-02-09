@@ -24,7 +24,7 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public Professor getProfessorById(Long id) throws Exception {
-        return professorRepository.findById(id).orElseThrow(() -> new Exception("Professor does not exist"));
+        return professorRepository.findById(id).orElseThrow(() -> new Exception("Professor does not exists"));
     }
 
     @Override
