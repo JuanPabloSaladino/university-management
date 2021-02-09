@@ -11,4 +11,6 @@ public interface StudentService {
     Student getStudentByIdentificationDocument(String identificationDocument) throws Exception;
 
     Student getStudentById(Long id) throws Exception;
+
+    void deleteStudent(Long id) throws Exception;
 }

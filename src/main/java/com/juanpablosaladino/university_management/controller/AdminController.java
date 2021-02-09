@@ -120,16 +120,7 @@ public class AdminController {
         return "professor-form";
     }
 
-    @GetMapping(value = "update-student/{id}")
-    public String getUpdateStudentForm(Model model, @PathVariable(name = "id") Long id) throws Exception {
-        Student studentToUpdate = studentService.getStudentById(id);
-        model.addAttribute("studentForm", studentToUpdate);
-        model.addAttribute("updateMode", true);
-        List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
-        model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
 
-        return "student-form";
-    }
 
     @PostMapping("/update-student")
     public String updateStudent(@Valid @ModelAttribute("studentForm") Student student, BindingResult result, ModelMap model, RedirectAttributes redirectAttributes) {
@@ -161,6 +152,32 @@ public class AdminController {
         return "student-form";
     }
 
+    @GetMapping(value = "update-student/{id}")
+    public String getUpdateStudentForm(Model model, @PathVariable(name = "id") Long id) throws Exception {
+        Student studentToUpdate = studentService.getStudentById(id);
+        model.addAttribute("studentForm", studentToUpdate);
+        model.addAttribute("updateMode", true);
+        List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
+        model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
+
+        return "student-form";
+    }
+
+    @GetMapping("/delete-student/{id}")
+    public String deleteStudent(Model model, @PathVariable(name = "id") Long id, RedirectAttributes redirectAttributes) {
+
+        try {
+            studentService.deleteStudent(id);
+            redirectAttributes.addFlashAttribute("successfullDelete", true);
+
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", e.getMessage());
+        }
+
+        return "redirect:/admin/users-list";
+
+    }
+
 
     @GetMapping("/users-list")
     public String usersList(Model model) {
@@ -178,7 +195,12 @@ public class AdminController {
 
     @GetMapping(value = "update-professor/cancel")
     public String cancelUpdateUser() {
-        return "redirect:/users-list";
+        return "redirect:/admin/users-list";
+    }
+
+    @GetMapping(value = "subject-form")
+    public String getSubjectForm() {
+        return null;
     }
 
 }

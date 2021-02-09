@@ -47,6 +47,12 @@ public class StudentServiceImpl implements StudentService {
         return studentRepository.findById(id).orElseThrow(() -> new Exception("Student does not exists"));
     }
 
+    @Override
+    public void deleteStudent(Long id) throws Exception {
+        Student student = getStudentById(id);
+        studentRepository.delete(student);
+    }
+
     private boolean checkUserEmailIsAvaible(User user) throws Exception {
         Optional<User> userFound = userRepository.findByEmail(user.getEmail());
         if (userFound.isPresent()) {
