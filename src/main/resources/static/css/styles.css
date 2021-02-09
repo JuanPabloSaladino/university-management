@@ -25,3 +25,7 @@ body {
     height: 9em;
     margin-top: -5em;
 }
+
+.navbar {
+    opacity: 0.8;
+}
