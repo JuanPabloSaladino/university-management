@@ -1,4 +1,4 @@
-package com.juanpablosaladino.university_management.controller;
+package com.juanpablosaladino.university_management.model;
 
 import javax.persistence.*;
 

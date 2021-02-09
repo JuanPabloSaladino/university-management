@@ -1,6 +1,6 @@
 package com.juanpablosaladino.university_management.repository;
 
-import com.juanpablosaladino.university_management.controller.TypeOfIdentificationDocument;
+import com.juanpablosaladino.university_management.model.TypeOfIdentificationDocument;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

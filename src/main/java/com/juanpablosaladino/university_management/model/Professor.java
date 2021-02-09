@@ -1,7 +1,5 @@
 package com.juanpablosaladino.university_management.model;
 
-import com.juanpablosaladino.university_management.controller.TypeOfIdentificationDocument;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 

@@ -1,6 +1,6 @@
 package com.juanpablosaladino.university_management.service;
 
-import com.juanpablosaladino.university_management.controller.TypeOfIdentificationDocument;
+import com.juanpablosaladino.university_management.model.TypeOfIdentificationDocument;
 
 public interface IdentificationDocumentService {
 

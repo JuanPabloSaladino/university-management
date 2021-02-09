@@ -1,13 +1,9 @@
 package com.juanpablosaladino.university_management.model;
 
-import com.juanpablosaladino.university_management.controller.TypeOfIdentificationDocument;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 
 @Entity
 public class Student extends User {

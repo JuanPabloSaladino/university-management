@@ -1,8 +1,8 @@
 package com.juanpablosaladino.university_management.controller;
 
-import com.juanpablosaladino.university_management.model.Professor;
 import com.juanpablosaladino.university_management.model.Role;
 import com.juanpablosaladino.university_management.model.Student;
+import com.juanpablosaladino.university_management.model.TypeOfIdentificationDocument;
 import com.juanpablosaladino.university_management.service.IdentificationDocumentService;
 import com.juanpablosaladino.university_management.service.RoleService;
 import com.juanpablosaladino.university_management.service.StudentService;
@@ -13,10 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
