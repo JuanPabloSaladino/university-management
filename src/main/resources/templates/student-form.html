@@ -73,14 +73,6 @@
                             </div>
                         </div>
 
-                        <!--                        <select class="form-select" aria-label="Default select example"
-                                                        id="identificationDocument">
-                                                    &lt;!&ndash;th:field="${studentForm.identificationDocument}">&ndash;&gt;
-                                                    <option>DNI</option>
-                                                    <option value="2">Libreta Cívica</option>
-                                                    <option value="3">Libreta Enrolamiento</option>
-                                                </select>-->
-
                         <div class="row justify-content-center mt-3">
                             <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
                                 <label class="col-form-label">Identification Document</label>
@@ -94,15 +86,10 @@
                                             th:value="${typeOfIdentificationDocument.id}"
                                     ></option>
                                 </select>
-                                <!--                                <div class="alert alert-danger my-1 text-center" role="alert"
-                                                                     th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">
-                                                                    Name Error
-                                                                </div>-->
                             </div>
                             <div class="col-sm-12 col-md-3 text-center my-2">
                                 <input type="text" class="form-control" id="identificationDocument"
                                        th:field="${studentForm.identificationDocument}" required>
-                                <!--required-->
 
                                 <div class="alert alert-danger my-1 text-center" role="alert"
                                      th:if="${#fields.hasErrors('identificationDocument')}"
@@ -131,7 +118,8 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-center mt-3" th:if="${updateMode == null or updateMode == false}"><!--
+                        <div class="row justify-content-center mt-3"
+                             th:if="${updateMode == null or updateMode == false}"><!--
                              th:if="${updateMode == null or updateMode == false}">-->
                             <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
                                 <label for="password" class="col-form-label">Password</label>
@@ -151,7 +139,8 @@
                             </div>
                         </div>
 
-                        <div class="row justify-content-center mt-3" th:if="${updateMode == null or updateMode == false}">
+                        <div class="row justify-content-center mt-3"
+                             th:if="${updateMode == null or updateMode == false}">
                             <!--th:if="${updateMode == null or updateMode == false}">-->
                             <div class="col-sm-12 col-md-2 col-lg-3 text-center mt-2">
                                 <label for="password-confirmation" class="col-form-label">Confirm password</label>
@@ -162,8 +151,9 @@
 
                                 <div class="alert alert-danger my-1 text-center" role="alert"
                                      th:if="${#fields.hasErrors('passwordConfirmation')}"
-                                     th:errors="*{passwordConfirmation}">Name Error
+                                     th:errors="*{passwordConfirmation}"> Name Error
                                 </div>
+
                             </div>
 
 
@@ -211,6 +201,10 @@
                                                                 </div>
                                                             </div>
                                                         </div>-->
+                        </div>
+
+                        <div class="alert alert-danger my-5 text-center" role="alert"
+                             th:if="${errorMessage}" th:text="${errorMessage}"> Error
                         </div>
 
                     </form>

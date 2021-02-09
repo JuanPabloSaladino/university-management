@@ -61,7 +61,7 @@ public class AdminController {
                 professor.setRoles((Set<Role>) professorRoles);
 
                 professor.setActive(true);
-                professorService.createProfessor(professor);
+                userService.createUser(professor);
                 model.addAttribute("professorForm", new Professor());
 /*
                 model.addAttribute("successfullRegistration", true);

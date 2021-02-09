@@ -6,6 +6,7 @@ import com.juanpablosaladino.university_management.model.Student;
 import com.juanpablosaladino.university_management.service.IdentificationDocumentService;
 import com.juanpablosaladino.university_management.service.RoleService;
 import com.juanpablosaladino.university_management.service.StudentService;
+import com.juanpablosaladino.university_management.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +28,14 @@ public class StudentController {
     private StudentService studentService;
     private IdentificationDocumentService identificationDocumentService;
     private RoleService roleService;
+    private UserService userService;
 
     @Autowired
-    public StudentController(StudentService studentService, IdentificationDocumentService identificationDocumentService, RoleService roleService) {
+    public StudentController(StudentService studentService, IdentificationDocumentService identificationDocumentService, RoleService roleService, UserService userService) {
         this.studentService = studentService;
         this.identificationDocumentService = identificationDocumentService;
         this.roleService = roleService;
+        this.userService = userService;
     }
 
 /*    @PostMapping("/login")
@@ -68,6 +71,7 @@ public class StudentController {
                 studentService.createStudent(student);
                 model.addAttribute("studentForm", new Student());
                 model.addAttribute("successfullRegistration", true);
+
                 return "index";
 /*
                 return "redirect:/?successfullRegistration=true";
@@ -77,6 +81,10 @@ public class StudentController {
                 List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
                 model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
                 model.addAttribute("errorMessage", e.getMessage());
+
+                String mensajePrueba = student.getClass().getSimpleName();
+
+                model.addAttribute("mensajePrueba", mensajePrueba);
             }
         }
         return "student-form";

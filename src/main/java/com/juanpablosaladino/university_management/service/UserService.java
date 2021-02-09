@@ -1,13 +1,15 @@
 package com.juanpablosaladino.university_management.service;
 
 import com.juanpablosaladino.university_management.model.User;
+
+import java.util.Optional;
 /*
 import org.springframework.security.core.userdetails.UserDetailsService;
 */
 
 public interface UserService /*extends UserDetailsService */{
 
-    User findByEmail(String email);
+    Optional<User> findByEmail(String email);
 
     Iterable<User> getUsers();
 

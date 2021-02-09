@@ -1,6 +1,5 @@
 package com.juanpablosaladino.university_management.service;
 
-import com.juanpablosaladino.university_management.model.Role;
 import com.juanpablosaladino.university_management.model.User;
 import com.juanpablosaladino.university_management.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;*/
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -24,7 +21,7 @@ public class UserServiceImpl implements UserService {
         this.userRepository = userRepository;
     }
 
-    public User findByEmail(String email) {
+    public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
@@ -35,9 +32,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) throws Exception {
-        if (checkUserEmailIsAvaible(user) && checkPasswordIsValid(user)) {
-            user = userRepository.save(user);
+        if (user.getClass().getSimpleName() == "Student") {
+            if (checkUserEmailIsAvaible(user) && checkPasswordIsValid(user)) {
+                user = userRepository.save(user);
+            }
+        } else {
+            if (checkUserEmailIsAvaible(user)) {
+                user = userRepository.save(user);
+            }
         }
+
         return user;
     }
 
@@ -61,14 +65,14 @@ public class UserServiceImpl implements UserService {
     }
 
     private boolean checkUserEmailIsAvaible(User user) throws Exception {
-        Optional<User> userFound = Optional.ofNullable(userRepository.findByEmail(user.getEmail()));
+        Optional<User> userFound = userRepository.findByEmail(user.getEmail());
         if (userFound.isPresent()) {
             throw new Exception("Email in use");
         }
         return true;
     }
 
-    private boolean checkPasswordIsValid(User user) throws Exception {
+    public boolean checkPasswordIsValid(User user) throws Exception {
         if (!user.getPassword().equals(user.getPasswordConfirmation())) {
             throw new Exception("Passwords are diferents");
         }
