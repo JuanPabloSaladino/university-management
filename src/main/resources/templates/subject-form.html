@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="partial/common-head"></div>
+
+<div class="container">
+
+    <div class="row my-5 py-5">
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+        <div class="col-sm-8 col-md-8 col-lg-8">
+            <div class="card border border-dark border-1 text-white bg-dark" id="form-background">
+                <img src="/img/subjects.png" class="mb-4 mx-auto img-fluid" id="user-image" alt="subjects image">
+                <div class="card-body">
+
+                    <h4 class="bg-dark text-white card-header text-center border-bottom pb-3 mb-4">
+                        Subject form
+                    </h4>
+
+                    <form method="post" th:object="${subjectForm}" th:action="'/admin/subjects/create'">
+
+                        <!--
+                                                <input type="hidden" th:field="${professorForm.id}" th:if="${updateMode}">
+                        -->
+
+                        <div class="row justify-content-center my-4">
+                            <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                <label for="subject-name" class="col-form-label">Name</label>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center">
+                                <input type="text" class="form-control" id="subject-name" required th:field="${subjectForm.name}">
+                                <!--
+                                                                       th:field="${professorForm.email}" required>
+                                -->
+
+                                <!--                                <div class="alert alert-danger my-1 text-center" role="alert"
+                                                                     th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+                                                                    Name Error
+                                                                </div>-->
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center my-4 form-floating">
+                            <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                <label for="subject-description">Description</label>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center">
+                                <textarea class="form-control" id="subject-description" th:field="${subjectForm.description}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center my-4">
+                            <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                <label for="subject-information">Information</label>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center">
+                                <textarea class="form-control" id="subject-information" th:field="${subjectForm.information}"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center my-4">
+                            <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                <label for="subject-max-number-of-students" class="col-form-label">Max number of
+                                    students</label>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center">
+                                <input type="number" class="form-control" id="subject-max-number-of-students" required th:field="${subjectForm.max_number_of_students}">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center my-4">
+                            <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                <label for="subject-professor" class="col-form-label">Professor</label>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center">
+                                <input type="text" class="form-control" id="subject-professor">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-center my-4">
+
+                            <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                <label class="col-form-label" for="flexSwitchCheckDefault">Avaible</label>
+                            </div>
+                            <div class="col-sm-12 col-md-8 col-lg-6 my-2 text-center my-auto">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" th:field="${subjectForm.avaible}">
+                            </div>
+
+                        </div>
+
+
+                        <!--                        <div class="row justify-content-center mt-3">
+                                                    <div class="col-sm-12 col-md-12 col-lg-3 text-center mt-2">
+                                                        <label class="col-form-label">Identification Document</label>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8 col-lg-3 text-center my-2">
+                                                        <select class="form-select" aria-label="Default select example"
+                                                                id="tipeOfIdentificationDocument"
+                                                                th:field="${professorForm.typeOfIdentificationDocument}">
+                                                            <option th:each="typeOfIdentificationDocument: ${typesOfIdentificationDocument}"
+                                                                    th:text="${typeOfIdentificationDocument.name}"
+                                                                    th:value="${typeOfIdentificationDocument.id}"
+                                                            ></option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-8 col-lg-3 text-center my-2">
+                                                        <input type="text" class="form-control" id="identificationDocument"
+                                                               th:field="${professorForm.identificationDocument}" required>
+                                                        &lt;!&ndash;required&ndash;&gt;
+
+                                                        <div class="alert alert-danger my-1 text-center" role="alert"
+                                                             th:if="${#fields.hasErrors('identificationDocument')}"
+                                                             th:errors="*{identificationDocument}">Name Error
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+
+                        <div class="d-grid gap-2 col-sm-12 col-md-12 col-lg-8 mx-auto mt-5 mb-2">
+                            <button type="submit" class="btn btn-lg btn-success">
+                                REGISTER
+                            </button>
+                        </div>
+
+                        <!--                        <div class="alert alert-danger my-5 text-center" role="alert"
+                                                     th:if="${errorMessage}" th:text="${errorMessage}"> Error
+                                                </div>-->
+
+                    </form>
+                    <!--<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+                    <form th:action="@{/logout}" method="post">
+                        <input type="submit" value="Cerrar Sesion"/>
+                    </form>-->
+
+                </div>
+            </div>
+
+        </div>
+        <div class="col-sm-2 col-md-2 col-lg-2"></div>
+    </div>
+
+</div>
+
+<div th:replace="partial/common-footer"></div>

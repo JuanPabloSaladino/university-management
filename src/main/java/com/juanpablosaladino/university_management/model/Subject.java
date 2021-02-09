@@ -19,7 +19,7 @@ public class Subject {
     private String information;
 
     @Column
-    private boolean avaible;
+    private Boolean avaible;
 
     @Column
     private Integer max_number_of_students;
@@ -33,7 +33,7 @@ public class Subject {
     public Subject() {
     }
 
-    public Subject(Long id, String name, String description, String information, boolean avaible, Integer max_number_of_students, Enrollment enrollment, Professor professor) {
+    public Subject(Long id, String name, String description, String information, Boolean avaible, Integer max_number_of_students, Enrollment enrollment, Professor professor) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -76,11 +76,11 @@ public class Subject {
         this.information = information;
     }
 
-    public boolean isAvaible() {
+    public Boolean getAvaible() {
         return avaible;
     }
 
-    public void setAvaible(boolean avaible) {
+    public void setAvaible(Boolean avaible) {
         this.avaible = avaible;
     }
 

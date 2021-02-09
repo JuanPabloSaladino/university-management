@@ -88,4 +88,10 @@ public class StudentController {
         return "student-form";
     }
 
+/*    @GetMapping(value = "/enrollment")
+    public String enrollmentForm(Model model){
+        model.addAttribute("enrollmentForm", enrollmentForm);
+        return "enrollment-form";
+    }*/
+
 }

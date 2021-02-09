@@ -22,14 +22,16 @@ public class AdminController {
     private ProfessorService professorService;
     private UserService userService;
     private StudentService studentService;
+    private SubjectService subjectService;
 
     @Autowired
-    public AdminController(IdentificationDocumentService identificationDocumentService, RoleService roleService, ProfessorService professorService, UserService userService, StudentService studentService) {
+    public AdminController(IdentificationDocumentService identificationDocumentService, RoleService roleService, ProfessorService professorService, UserService userService, StudentService studentService, SubjectService subjectService) {
         this.identificationDocumentService = identificationDocumentService;
         this.roleService = roleService;
         this.professorService = professorService;
         this.userService = userService;
         this.studentService = studentService;
+        this.subjectService = subjectService;
     }
 
     @PostMapping("/login")
@@ -119,7 +121,6 @@ public class AdminController {
         }
         return "professor-form";
     }
-
 
 
     @PostMapping("/update-student")
@@ -213,9 +214,37 @@ public class AdminController {
         return "redirect:/admin/users-list";
     }
 
-    @GetMapping(value = "subject-form")
-    public String getSubjectForm() {
-        return null;
+    @GetMapping(value = "/subjects/create")
+    public String getSubjectForm(Model model) {
+        model.addAttribute("subjectForm", new Subject());
+        return "subject-form";
+    }
+
+    @PostMapping(value = "/subjects/create")
+    public String createSubject(@Valid @ModelAttribute("subjectForm") Subject subject, ModelMap model, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("subjectForm", subject);
+            //List<Professor> professors = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
+            //model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);
+        } else {
+            try {
+
+                subjectService.createSubject(subject);
+                model.addAttribute("subjectForm", new Subject());
+
+/*
+                redirectAttributes.addFlashAttribute("successfullRegistration", true);
+*/
+                return "redirect:/admin/users-list";
+
+            } catch (Exception e) {
+                model.addAttribute("subjectForm", subject);
+/*                List<TypeOfIdentificationDocument> typesOfIdentificationDocument = (List<TypeOfIdentificationDocument>) identificationDocumentService.getTypesOfIdentificationDocument();
+                model.addAttribute("typesOfIdentificationDocument", typesOfIdentificationDocument);*/
+                model.addAttribute("errorMessage", e.getMessage());
+            }
+        }
+        return "professor-form";
     }
 
 }
