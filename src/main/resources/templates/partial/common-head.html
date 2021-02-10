@@ -15,19 +15,44 @@
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top mb-5 text-white">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top mb-5 text-white">
     <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+
+        <a class="navbar-brand" href="#" th:href="@{/login}">University Management</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                <a class="nav-link" href="#">Features</a>
-                <a class="nav-link" href="#">Pricing</a>
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-            </div>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="usersDropdownList" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Users
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#" th:href="@{/student/register-form}">Register student</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" th:href="@{/admin/professor-form}">Register professor</a>
+                        </li>
+                        <li><a class="dropdown-item" href="#" th:href="@{/admin/users-list}">List</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="SubjectsDropdownMenuLink" role="button"
+                       data-bs-toggle="dropdown" aria-expanded="false">
+                        Subjects
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#" th:href="@{/admin/subjects/create}">Create</a></li>
+                        <li><a class="dropdown-item" href="#" th:href="@{/admin/subjects}">List</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+        <div class="d-flex">
+            <button class="btn btn-outline-success" type="submit">LOGIN</button>
         </div>
     </div>
 </nav>
